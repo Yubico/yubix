@@ -12,7 +12,7 @@ Homepage: https://github.com/Yubico/yubi-x/
 Package: yubi-x
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
- freeradius (>= 2.1.12),
+ freeradius (>= 2.1.10),
  libanyevent-yubico-perl (>= 0.9.2),
  libcrypt-cbc-perl (>= 2.30),
  libdigest-perl (>= 1.17),
