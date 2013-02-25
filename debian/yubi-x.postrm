@@ -3,7 +3,7 @@
 set -e
 
 #Remove diversions
-dpkg-divert --package yubi-x --remove --rename /etc/freeradius/modules/perl
+dpkg-divert --package yubi-x --remove --rename --divert /etc/freeradius/modules/perl.real /etc/freeradius/modules/perl
 
 #DEBHELPER#
 
