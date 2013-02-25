@@ -5,6 +5,24 @@ set -e
 #Remove diversions
 dpkg-divert --package yubi-x --remove --rename --divert /etc/freeradius/modules/perl.real /etc/freeradius/modules/perl
 
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    #Deactivate yubikey site
+    if [ -L /etc/freeradius/sites-enabled/yubikey-default ]; then
+        rm -f /etc/freeradius/sites-enabled/yubikey-default
+    fi
+
+    #Restore default site
+    if [ ! -L /etc/freeradius/sites-enabled/default ]; then
+        ln -s ../sites-available/default /etc/freeradius/sites-enabled/default
+    fi
+
+    if [ -x /usr/sbin/invoke-rc.d ]; then
+        invoke-rc.d freeradius reload 3>/dev/null || true
+    else
+        /etc/init.d/freeradius reload 3>/dev/null || true
+    fi
+fi
+
 #DEBHELPER#
 
 exit 0

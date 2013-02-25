@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+# rlm_yubikey site
+if [ ! -L /etc/freeradius/sites-enabled/yubikey-default ]; then
+    ln -s /usr/share/rlm_yubikey/yubikey-default /etc/freeradius/sites-enabled/yubikey-default
+fi
+
+#Disable default site
+if [ -L /etc/freeradius/sites-enabled/default ]; then
+    rm -f /etc/freeradius/sites-enabled/default
+fi
+
+if [ -x /usr/sbin/invoke-rc.d ]; then
+    invoke-rc.d freeradius reload 3>/dev/null || true
+else
+    /etc/init.d/freeradius reload 3>/dev/null || true
+fi
+
+
+#DEBHELPER#
+
+exit 0
