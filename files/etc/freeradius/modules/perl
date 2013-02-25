@@ -1,0 +1,11 @@
+# -*- text -*-
+#
+#  $Id$
+
+#  Persistent, embedded Perl interpreter.
+#
+
+perl {
+	#rlm_yubikey
+	module = /usr/share/rlm_yubikey/rlm_yubikey.p
+}

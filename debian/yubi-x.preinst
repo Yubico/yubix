@@ -1,0 +1,3 @@
+#Diversions
+
+dpkg-divert --package yubi-x --add --rename --divert /etc/freeradius/modules/perl.real /etc/freeradius/modules/perl

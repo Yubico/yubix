@@ -1,0 +1,3 @@
+#Remove diversions
+
+dpkg-divert --package yubi-x --remove --rename /etc/freeradius/modules/perl
