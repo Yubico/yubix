@@ -1,0 +1,22 @@
+Source: yubi-x
+Section: misc
+Priority: extra
+Maintainer: Yubico Open Source Maintainers <ossmaint@yubico.com>
+Uploaders: Dain Nilsson <dain@yubico.com>
+Build-Depends: debhelper (>= 8.0.0),
+Standards-Version: 3.9.3
+Homepage: https://github.com/Yubico/yubi-x/
+#Vcs-Git: git://git.debian.org/collab-maint/yubi-x.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/yubi-x.git;a=summary
+
+Package: yubi-x
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ freeradius (>= 2.1.12),
+ libanyevent-yubico-perl (>= 0.9.2),
+ libcrypt-cbc-perl (>= 2.30),
+ libdigest-perl (>= 1.17),
+ liberror-perl (>= 0.17),
+ libcrypt-blowfish-perl (>= 2.12)
+Description: Sets up and configures basic YubiKey servers.
+ <insert long description, indented with spaces>
