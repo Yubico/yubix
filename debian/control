@@ -18,5 +18,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  libdigest-perl (>= 1.17),
  liberror-perl (>= 0.17),
  libcrypt-blowfish-perl (>= 2.12)
-Description: Sets up and configures basic YubiKey servers.
- <insert long description, indented with spaces>
+Description: Sets up and configures basic YubiKey servers
+ Sets up default installations of the following:
+ yubikey-ksm, yubikey-val, freeradius with rlm_yubikey.
+ See each project for further details.

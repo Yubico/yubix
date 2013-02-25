@@ -1,0 +1,17 @@
+We describe here one way to work with the package sources.
+
+Initialize cowbuilder, for Ubuntu Precise:
+
+sudo cowbuilder --create --distribution precise --components "main universe" --basepath /var/cache/pbuilder/precise.cow
+
+Optionally update cowbuilder:
+
+sudo cowbuilder --update --basepath /var/cache/pbuilder/precise.cow
+
+Build the package:
+
+git-buildpackage --git-builder="pdebuild --auto-debsign --pbuilder cowbuilder -- --basepath /var/cache/pbuilder/precise.cow"
+
+If all goes well, you should have newly built packages in
+/var/cache/pbuilder/result/.
+

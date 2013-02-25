@@ -1,3 +1,10 @@
-#Remove diversions
+#!/bin/sh
 
+set -e
+
+#Remove diversions
 dpkg-divert --package yubi-x --remove --rename /etc/freeradius/modules/perl
+
+#DEBHELPER#
+
+exit 0
