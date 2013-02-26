@@ -1,17 +1,9 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-DEB_MAKE_BUILD_TARGET := #no default make target.
-
 DEB_DIVERT_FILES_yubi-x += \
     /etc/freeradius/modules/perl.divert
 
 include /usr/share/cdbs/1/rules/config-package.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/makefile.mk
 
-#override_dh_auto_build:
-# There is no default 'make' target for this package
-
-#%:
-#	dh $@ 

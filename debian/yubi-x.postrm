@@ -22,7 +22,4 @@ fi
 
 #DEBHELPER#
 
-#Remove diversions
-#dpkg-divert --package yubi-x --divert /etc/freeradius/modules/perl.distrib --remove --rename /etc/freeradius/modules/perl
-
 exit 0

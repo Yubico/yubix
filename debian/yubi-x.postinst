@@ -2,12 +2,12 @@
 
 set -e
 
-# rlm_yubikey site
+# Enable rlm_yubikey site
 if [ ! -L /etc/freeradius/sites-enabled/yubikey-default ]; then
     ln -s /usr/share/rlm_yubikey/yubikey-default /etc/freeradius/sites-enabled/yubikey-default
 fi
 
-#Disable default site
+# Disable default site
 if [ -L /etc/freeradius/sites-enabled/default ]; then
     rm -f /etc/freeradius/sites-enabled/default
 fi
