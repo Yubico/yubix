@@ -6,6 +6,6 @@
 #
 
 perl {
-	#rlm_yubikey
-	module = /usr/share/rlm_yubikey/rlm_yubikey.p
+	#Use rlm_yubikey
+	module = /usr/share/rlm_yubikey/rlm_yubikey.pl
 }

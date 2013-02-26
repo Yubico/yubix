@@ -18,12 +18,12 @@
 #  Ideally, the "configure" process should automatically enable this
 #  dictionary, but we don't yet do that.
 #
-#$INCLUDE	@prefix@/dictionary.dhcp
+#$INCLUDE	/usr/dictionary.dhcp
 
 #
 #	The filename given here should be an absolute path. 
 #
-$INCLUDE	@prefix@/share/freeradius/dictionary
+$INCLUDE	/usr/share/freeradius/dictionary
 
 $INCLUDE        /usr/share/rlm_yubikey/dictionary
 
