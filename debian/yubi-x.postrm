@@ -2,9 +2,6 @@
 
 set -e
 
-#Remove diversions
-dpkg-divert --package yubi-x --remove --rename --divert /etc/freeradius/modules/perl.real /etc/freeradius/modules/perl
-
 if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     #Deactivate yubikey site
     if [ -L /etc/freeradius/sites-enabled/yubikey-default ]; then
@@ -24,5 +21,8 @@ if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
 fi
 
 #DEBHELPER#
+
+#Remove diversions
+dpkg-divert --package yubi-x --divert /etc/freeradius/modules/perl.distrib --remove --rename /etc/freeradius/modules/perl
 
 exit 0
