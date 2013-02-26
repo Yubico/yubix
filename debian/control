@@ -4,6 +4,8 @@ Priority: extra
 Maintainer: Yubico Open Source Maintainers <ossmaint@yubico.com>
 Uploaders: Dain Nilsson <dain@yubico.com>
 Build-Depends: debhelper (>= 8.0.0),
+ cdbs,
+ config-package-dev
 Standards-Version: 3.9.3
 Homepage: https://github.com/Yubico/yubi-x/
 #Vcs-Git: git://git.debian.org/collab-maint/yubi-x.git

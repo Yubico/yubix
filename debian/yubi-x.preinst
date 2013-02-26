@@ -3,7 +3,7 @@
 set -e
 
 #Diversions
-dpkg-divert --package yubi-x --divert /etc/freeradius/modules/perl.distrib --add --rename /etc/freeradius/modules/perl
+#dpkg-divert --package yubi-x --divert /etc/freeradius/modules/perl.distrib --add --rename /etc/freeradius/modules/perl
 
 #DEBHELPER#
 
