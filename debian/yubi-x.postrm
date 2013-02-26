@@ -12,14 +12,14 @@ if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     if [ ! -L /etc/freeradius/sites-enabled/default ]; then
         ln -s ../sites-available/default /etc/freeradius/sites-enabled/default
     fi
-
-    if [ -x /usr/sbin/invoke-rc.d ]; then
-        invoke-rc.d freeradius reload 3>/dev/null || true
-    else
-        /etc/init.d/freeradius reload 3>/dev/null || true
-    fi
 fi
 
 #DEBHELPER#
+
+if [ -x /usr/sbin/invoke-rc.d ]; then
+    invoke-rc.d freeradius reload 3>/dev/null || true
+else
+    /etc/init.d/freeradius reload 3>/dev/null || true
+fi
 
 exit 0

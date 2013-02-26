@@ -12,13 +12,12 @@ if [ -L /etc/freeradius/sites-enabled/default ]; then
     rm -f /etc/freeradius/sites-enabled/default
 fi
 
+#DEBHELPER#
+
 if [ -x /usr/sbin/invoke-rc.d ]; then
     invoke-rc.d freeradius reload 3>/dev/null || true
 else
     /etc/init.d/freeradius reload 3>/dev/null || true
 fi
-
-
-#DEBHELPER#
 
 exit 0
