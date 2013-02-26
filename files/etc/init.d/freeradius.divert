@@ -1,0 +1,77 @@
+#!/bin/sh
+# Start/stop the FreeRADIUS daemon.
+
+### BEGIN INIT INFO
+# Provides:          freeradius
+# Required-Start:    $remote_fs $network $syslog
+# Should-Start:      $time mysql slapd postgresql samba krb5-kdc
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Radius Daemon 
+# Description:       Extensible, configurable radius daemon
+### END INIT INFO
+
+set -e
+
+. /lib/lsb/init-functions
+
+PROG="freeradius"
+PROGRAM="/usr/sbin/freeradius"
+PIDFILE="/var/run/freeradius/freeradius.pid"
+DESCR="FreeRADIUS daemon"
+
+if [ -r /etc/default/$PROG ]; then
+  . /etc/default/$PROG
+fi
+
+test -f $PROGRAM || exit 0
+
+# /var/run may be a tmpfs
+if [ ! -d /var/run/freeradius ]; then
+  mkdir -p /var/run/freeradius
+  chown freerad:freerad /var/run/freeradius
+fi
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+
+ret=0
+
+case "$1" in
+        start)
+                log_daemon_msg "Starting $DESCR" "$PROG"
+                LD_PRELOAD=/usr/lib/libperl.so.5.14 start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $PROGRAM -- $FREERADIUS_OPTIONS || ret=$?
+                log_end_msg $ret
+                exit $ret
+                ;;
+        stop)
+                log_daemon_msg "Stopping $DESCR" "$PROG"
+                if [ -f "$PIDFILE" ] ; then
+                  LD_PRELOAD=/usr/lib/libperl.so.5.14 start-stop-daemon --stop --retry=TERM/30/KILL/5 --quiet --pidfile $PIDFILE || ret=$?
+                else 
+                  log_action_cont_msg "$PIDFILE not found"
+                  ret=0
+                fi
+                log_end_msg $ret
+                ;;
+        restart)
+                $0 stop
+                $0 start
+                ;;
+        reload|force-reload)
+                log_daemon_msg "Reloading $DESCR" "$PROG"
+                if [ -f "$PIDFILE" ] ; then
+                  LD_PRELOAD=/usr/lib/libperl.so.5.14 start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE || ret=$?
+                else 
+                  log_action_cont_msg "$PIDFILE not found"
+                  ret=0
+                fi
+                log_end_msg $ret
+                ;;
+        *)
+                echo "Usage: $0 start|stop|restart|force-reload|reload"
+                exit 1 
+                ;;
+esac
+
+exit 0
