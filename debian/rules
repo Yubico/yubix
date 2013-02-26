@@ -2,7 +2,8 @@
 # -*- makefile -*-
 
 DEB_DIVERT_FILES_yubi-x += \
-    /etc/freeradius/modules/perl.divert
+    /etc/freeradius/modules/perl.divert \
+    /etc/freeradius/dictionary.divert
 
 include /usr/share/cdbs/1/rules/config-package.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
