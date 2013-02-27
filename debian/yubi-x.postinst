@@ -5,6 +5,7 @@ set -e
 # Fix permissions
 chown root:freerad /etc/yubico/rlm/*
 chmod 640 /etc/yubico/rlm/*
+chmod 660 /etc/yubico/rlm/ykmapping
 
 # Enable rlm_yubikey site
 if [ ! -L /etc/freeradius/sites-enabled/yubikey-default ]; then

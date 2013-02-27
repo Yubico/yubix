@@ -32,14 +32,26 @@ use AnyEvent::Yubico;
 use Crypt::CBC;
 use Error qw(:try);
 
+#Add script directory to @INC:
+use File::Spec::Functions qw(rel2abs);
+use File::Basename;
+use lib dirname(rel2abs($0));
+
 # Default configuration
 our $id_len = 12;
-our $verify_urls = [ "http://127.0.0.1/wsapi/2.0/verify" ];
-our $client_id = 1;
-our $api_key = "";
+our $verify_urls = [
+	"https://api.yubico.com/wsapi/2.0/verify",
+	"https://api2.yubico.com/wsapi/2.0/verify",
+	"https://api3.yubico.com/wsapi/2.0/verify",
+	"https://api4.yubico.com/wsapi/2.0/verify",
+	"https://api5.yubico.com/wsapi/2.0/verify"
+];
+our $client_id = 10549;
+our $api_key = "zeYjxHz+X/d12FAq0av4U9goZHY=";
+our $allow_auto_provisioning = 1;
 our $allow_userless_login = 1;
-our $allow_single_factor = 1;
-our $mapping_file = "/etc/yubico/rlm/ykmapping";
+our $security_level = 0;
+our $mapping_file = undef;
 
 # Load user configuration
 do "/etc/yubico/rlm/ykrlm-config.cfg";
@@ -57,8 +69,13 @@ my $cipher = Crypt::CBC->new(
 my $ykval = AnyEvent::Yubico->new({
 	client_id => $client_id,
 	api_key => $api_key,
-	urls	=> $verify_urls
+	urls => $verify_urls
 });
+
+use YKmap;
+if(defined $mapping_file) {
+	YKmap::set_file($mapping_file);
+}
 
 ########################
 # FreeRADIUS functions #
@@ -112,8 +129,7 @@ sub authorize {
 			&radiusd::radlog(1, "Reject: No username or OTP");
 			$RAD_REPLY{'Reply-Message'} = "Missing username and OTP!";
 			return RLM_MODULE_REJECT;
-
-		} elsif(!$allow_single_factor or requires_otp($username)) {
+		} elsif($security_level eq 2 or ($security_level eq 1 and YKmap::has_otp($username))) {
 			$RAD_REPLY{'State'} = encrypt_password($RAD_REQUEST{'User-Password'});
 			$RAD_REPLY{'Reply-Message'} = "Please provide YubiKey OTP";
 			$RAD_CHECK{'Response-Packet-Type'} = "Access-Challenge";
@@ -129,15 +145,15 @@ sub authorize {
 
 		#Lookup username if needed/allowed.
 		if($username eq '' and $allow_userless_login) {
-			$username = lookup_username($public_id);
+			$username = YKmap::lookup_username($public_id);
 			&radiusd::radlog(1, "lookup of $public_id gave $username");
 			$RAD_REQUEST{'User-Name'} = $username;
 		}
 
-		if(key_belongs_to($public_id, $username)) {
+		if(YKmap::key_belongs_to($public_id, $username)) {
 			&radiusd::radlog(1, "$username has valid OTP: $otp");
 			return RLM_MODULE_OK;
-		} elsif(can_provision($public_id, $username)) {
+		} elsif($allow_auto_provisioning and YKmap::can_provision($public_id, $username)) {
 			&radiusd::radlog(1, "Attempt to provision $public_id for $username post authentication");
 			$RAD_CHECK{'YubiKey-Provision'} = $public_id;
 			return RLM_MODULE_UPDATED;	
@@ -160,7 +176,7 @@ sub post_auth {
 	my $username = $RAD_REQUEST{'User-Name'};
 
 	if($public_id =~ /^[cbdefghijklnrtuv]{$id_len}$/) {
-		provision($public_id, $username);
+		YKmap::provision($public_id, $username);
 	}
 
 	return RLM_MODULE_OK;
@@ -191,66 +207,3 @@ sub decrypt_password {
 
 	return $cipher->decrypt($ciphertext);
 }
-
-###################
-# YubiKey Mapping #
-###################
-
-# Simple file based YubiKey mapping:
-my $mapping_data = {};
-open(my $info, $mapping_file);
-while(my $line = <$info>) {
-	chomp($line);
-	next if $line =~ /^(#|$)/;
-
-	my ($username, $keystring) = split(/:/, $line, 2);
-	my @keys = split(/,/, $keystring);
-	$mapping_data->{$username} = \@keys;
-}
-
-# Check if a particular username requires an OTP to log in.
-sub requires_otp {
-	my($username) = @_;
-	return exists($mapping_data->{$username});
-}
-
-# Checks if the given public id comes from a YubiKey belonging to the 
-# given user.
-sub key_belongs_to {
-	my($public_id, $username) = @_;
-	foreach my $x (@{$mapping_data->{$username}}) {
-		if($x eq $public_id) {
-			return 1;
-		}
-	}
-	return 0;
-}
-
-# Can we auto-provision the given YubiKey for the user?
-sub can_provision {
-	my($public_id, $username) = @_;
-
-	#TODO: Insert logic for determining if a YubiKey can be provisioned here
-	return 0;
-}
-
-# Provision the given YubiKey to the given user.
-sub provision {
-	my($public_id, $username) = @_;
-	
-	#TODO: Insert provisioning logic here
-	die(1,"Tried to provision $public_id to $username, but provisioning is not supported!");
-}
-
-sub lookup_username {
-	my($public_id) = @_;
-
-	foreach my $user (keys $mapping_data) {
-		if(key_belongs_to($public_id, $user)) {
-			return $user;
-		}
-	}
-
-	return undef;
-}
-
