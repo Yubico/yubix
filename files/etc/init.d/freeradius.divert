@@ -54,19 +54,9 @@ case "$1" in
                 fi
                 log_end_msg $ret
                 ;;
-        restart)
+        restart|reload|force-reload)
                 $0 stop
                 $0 start
-                ;;
-        reload|force-reload)
-                log_daemon_msg "Reloading $DESCR" "$PROG"
-                if [ -f "$PIDFILE" ] ; then
-                  LD_PRELOAD=/usr/lib/libperl.so.5.14 start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE || ret=$?
-                else 
-                  log_action_cont_msg "$PIDFILE not found"
-                  ret=0
-                fi
-                log_end_msg $ret
                 ;;
         *)
                 echo "Usage: $0 start|stop|restart|force-reload|reload"
