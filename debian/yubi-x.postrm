@@ -17,9 +17,9 @@ fi
 #DEBHELPER#
 
 if [ -x /usr/sbin/invoke-rc.d ]; then
-    invoke-rc.d freeradius reload 3>/dev/null || true
+    invoke-rc.d freeradius restart 3>/dev/null || true
 else
-    /etc/init.d/freeradius reload 3>/dev/null || true
+    /etc/init.d/freeradius restart 3>/dev/null || true
 fi
 
 exit 0
