@@ -2,6 +2,22 @@
 
 set -e
 
+# Remove symlinks for diverts
+if [ -L /etc/freeradius/modules/perl ]; then
+    rm -f /etc/freeradius/modules/perl
+fi
+if [ -L /etc/freeradius/dictionary ]; then
+    rm -f /etc/freeradius/dictionary
+fi
+if [ -L /etc/init.d/freeradius ]; then
+    rm -f /etc/init.d/freeradius
+fi
+
+# Remove diverts
+dpkg-divert --package yubi-x --rename --remove /etc/freeradius/modules/perl
+dpkg-divert --package yubi-x --rename --remove /etc/freeradius/dictionary
+dpkg-divert --package yubi-x --rename --remove /etc/init.d/freeradius
+
 if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     #Deactivate yubikey site
     if [ -L /etc/freeradius/sites-enabled/yubikey-default ]; then

@@ -7,6 +7,16 @@ chown root:freerad /etc/yubico/rlm/*
 chmod 640 /etc/yubico/rlm/*
 chmod 660 /etc/yubico/rlm/ykmapping
 
+# Set up diverts
+dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/perl.divert-orig /etc/freeradius/modules/perl
+dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/dictionary.divert-orig /etc/freeradius/dictionary
+dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/freeradius.divert-orig /etc/init.d/freeradius
+
+# Create symlinks to replace diverted files
+ln -s /usr/share/yubi-x/perl.divert /etc/freeradius/modules/perl
+ln -s /usr/share/yubi-x/dictionary.divert /etc/freeradius/dictionary
+ln -s /usr/share/yubi-x/freeradius.divert /etc/init.d/freeradius
+
 # Enable rlm_yubikey site
 if [ ! -L /etc/freeradius/sites-enabled/yubikey-default ]; then
     ln -s /usr/share/rlm_yubikey/yubikey-default /etc/freeradius/sites-enabled/yubikey-default
