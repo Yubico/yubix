@@ -13,9 +13,15 @@ dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/dictionar
 dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/freeradius.divert-orig /etc/init.d/freeradius
 
 # Create symlinks to replace diverted files
-ln -s /usr/share/yubi-x/perl.divert /etc/freeradius/modules/perl
-ln -s /usr/share/yubi-x/dictionary.divert /etc/freeradius/dictionary
-ln -s /usr/share/yubi-x/freeradius.divert /etc/init.d/freeradius
+if [ ! -L /etc/freeradius/modules/perl ]; then
+    ln -s /usr/share/yubi-x/perl.divert /etc/freeradius/modules/perl
+fi
+if [ ! -L /etc/freeradius/dictionary ]; then
+    ln -s /usr/share/yubi-x/dictionary.divert /etc/freeradius/dictionary
+fi
+if [ ! -L /etc/init.d/freeradius ]; then
+    ln -s /usr/share/yubi-x/freeradius.divert /etc/init.d/freeradius
+fi
 
 # Enable rlm_yubikey site
 if [ ! -L /etc/freeradius/sites-enabled/yubikey-default ]; then
