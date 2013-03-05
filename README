@@ -8,17 +8,23 @@ support.
 ## Configuration ##
 
 This describes a quick way to set up a system where users are
-authenticated over RADIUS with YubiKey OTP support.
+authenticated over RADIUS with YubiKey OTP support. Unless 
+otherwise specified, configuration options go in the main 
+configuration file, which is /etc/yubico/rlm/ykrlm-config.cfg.
 
 ### Setting up OTP validation ###
 
-By default, the RADIUS setup verifies OTPs using the validation
-server installed on localhost. If you would rather use a 
-different one (such as the YubiCloud), you can edit the 
-$validation_urls setting in /etc/yubico/rlm/ykrlm-config.cfg.
+By default, the freeRADIUS setup verifies OTPs using the 
+YubiCloud validation service. The YubiCloud service is free to 
+use and YubiKeys are shipped preprogrammed with a key that works 
+with the YubiCloud out of the box. If you would rather use a 
+different validation service, such as a locally installed one, 
+you can edit the $validation_urls setting in the configuration 
+file.
 
-If you intend to use the built in one, you will need to add 
-some YubiKeys to the KSM which is also running on localhost.
+If you intend to use the built in validation server, you will 
+need to add some YubiKeys to the KSM which is also running on 
+localhost.
 Please see [this guide](https://github.com/Yubico/yubikey-ksm/wiki/GenerateKSMKey)
 for further instructions on generating and importing keys into 
 the KSM.
@@ -42,8 +48,33 @@ available from [freeRADIUS](http://freeradius.org/doc/).
 ### Provisioning YubiKeys ###
 
 Once you have OTP verificatoin and users set up, you will need 
-to provision specific YubiKeys to your users. This is done by
-adding to the /etc/yubico/rlm/ykmapping file, one line per user.
+to provision specific YubiKeys to your users. This can be done 
+automatically using auto-provisioning, or done manually by 
+editing the mapping file located at /etc/yubico/rlm/ykmapping.
+
+#### Auto-Provisioning ####
+
+Auto-Provisioning gives you an easy way to associate YubiKeys 
+with existing accounts. First, you need to make sure that 
+auto-provisioning is enabled in the configuration file by 
+ensuring that $allow_auto_provisioning = 1 (it is on by default).
+
+With Auto-Provisioning enabled, YubiKeys are assigned to users 
+automatically. When an existing user that does not already have 
+a YubiKey provisioned logs in using a YubiKey, that YubiKey is 
+then assigned to the user. This allows you to hand out YubiKeys 
+to some or all of the users, and let the keys become locked to
+the accounts when they are used. If you need to make changes to 
+the auto-provisioned mapping or need to assign multiple YubiKeys 
+to the same user, see Manual Provisioning below.
+
+#### Manual Provisioning ####
+
+This is done by manualy editing the /etc/yubico/rlm/ykmapping 
+file, which contains all the username to YubiKey associations.
+Provisioning a YubiKey is done by adding one line per user to 
+the file.
+
 Each line should start with the username, then a colon (:), and
 lastly a comma (,) separated list of YubiKey public IDs which 
 are approved for the user.
@@ -59,12 +90,12 @@ cccccccccccd key, or the ccccccccccce key.
 
 **NOTE:** Users not listed in the ykmapping file will either 
 not be required to provide an OTP when logging in, or will 
-always be denied, depending on the $allow_single_factor setting 
-in the /etc/yubico/ykrlm-config.cfg file.
+always be denied, depending on the $security_level setting in 
+the main configuration file.
 
 Once everything is configured, you should be able to 
-authenticate using the radtest utility. The YubiKey OTP can 
-be provided by appending it either to the username or to the 
+authenticate using the radtest utility. The YubiKey OTP can be 
+provided by appending it either to the username or to the 
 password. Here's an example:
 
   $ radtest user1 testingcccccccccccbbtrtikevthrvhceudvvuveidihckgrgl 127.0.0.1 0 testing123
