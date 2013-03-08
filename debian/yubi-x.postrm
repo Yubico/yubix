@@ -14,9 +14,9 @@ if [ -L /etc/init.d/freeradius ]; then
 fi
 
 # Remove diverts
-dpkg-divert --package yubi-x --rename --remove /etc/freeradius/modules/perl
-dpkg-divert --package yubi-x --rename --remove /etc/freeradius/dictionary
-dpkg-divert --package yubi-x --rename --remove /etc/init.d/freeradius
+dpkg-divert --package yubix --rename --remove /etc/freeradius/modules/perl
+dpkg-divert --package yubix --rename --remove /etc/freeradius/dictionary
+dpkg-divert --package yubix --rename --remove /etc/init.d/freeradius
 
 if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     #Deactivate yubikey site

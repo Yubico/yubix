@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: yubi-x
+Upstream-Name: yubix
 Upstream-Contact: ossmaint@yubico.com
-Source: https://github.com/Yubico/yubi-x
+Source: https://github.com/Yubico/yubix
 
 Files: *
 Copyright: Copyright (c) 2013 Yubico AB

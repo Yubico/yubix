@@ -8,19 +8,19 @@ chmod 640 /etc/yubico/rlm/*
 chmod 660 /etc/yubico/rlm/ykmapping
 
 # Set up diverts
-dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/perl.divert-orig /etc/freeradius/modules/perl
-dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/dictionary.divert-orig /etc/freeradius/dictionary
-dpkg-divert --package yubi-x --add --rename --divert /usr/share/yubi-x/freeradius.divert-orig /etc/init.d/freeradius
+dpkg-divert --package yubix --add --rename --divert /usr/share/yubix/perl.divert-orig /etc/freeradius/modules/perl
+dpkg-divert --package yubix --add --rename --divert /usr/share/yubix/dictionary.divert-orig /etc/freeradius/dictionary
+dpkg-divert --package yubix --add --rename --divert /usr/share/yubix/freeradius.divert-orig /etc/init.d/freeradius
 
 # Create symlinks to replace diverted files
 if [ ! -L /etc/freeradius/modules/perl ]; then
-    ln -s /usr/share/yubi-x/perl.divert /etc/freeradius/modules/perl
+    ln -s /usr/share/yubix/perl.divert /etc/freeradius/modules/perl
 fi
 if [ ! -L /etc/freeradius/dictionary ]; then
-    ln -s /usr/share/yubi-x/dictionary.divert /etc/freeradius/dictionary
+    ln -s /usr/share/yubix/dictionary.divert /etc/freeradius/dictionary
 fi
 if [ ! -L /etc/init.d/freeradius ]; then
-    ln -s /usr/share/yubi-x/freeradius.divert /etc/init.d/freeradius
+    ln -s /usr/share/yubix/freeradius.divert /etc/init.d/freeradius
 fi
 
 # Enable rlm_yubikey site

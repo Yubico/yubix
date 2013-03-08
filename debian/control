@@ -1,15 +1,15 @@
-Source: yubi-x
+Source: yubix
 Section: misc
 Priority: extra
 Maintainer: Yubico Open Source Maintainers <ossmaint@yubico.com>
 Uploaders: Dain Nilsson <dain@yubico.com>
 Build-Depends: debhelper (>= 8), config-package-dev
 Standards-Version: 3.9.3
-Homepage: https://github.com/Yubico/yubi-x/
-#Vcs-Git: git://git.debian.org/collab-maint/yubi-x.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/yubi-x.git;a=summary
+Homepage: https://github.com/Yubico/yubix/
+#Vcs-Git: git://git.debian.org/collab-maint/yubix.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/yubix.git;a=summary
 
-Package: yubi-x
+Package: yubix
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  yubikey-ksm (>= 1.12),
