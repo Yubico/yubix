@@ -1,3 +1,9 @@
+yubix (0.5.2) precise; urgency=low
+
+  * Fixed broken scripts. 
+
+ -- Dain Nilsson <dain@yubico.com>  Tue, 12 Mar 2013 09:56:58 +0100
+
 yubix (0.5.1) precise; urgency=low
 
   * Initial Release.
