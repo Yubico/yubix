@@ -2,119 +2,12 @@ YubiX
 ======
 
 Installs and configures various Yubico packages, such as a KSM,
-A local YubiKey validation server, and freeRADIUS with YubiKey 
+A local YubiKey validation server, and FreeRADIUS with YubiKey 
 support.
 
-## Configuration ##
+To get started, read the Getting Started guide:
+https://github.com/Yubico/yubix/wiki/GettingStarted
 
-This describes a quick way to set up a system where users are
-authenticated over RADIUS with YubiKey OTP support. Unless 
-otherwise specified, configuration options go in the main 
-configuration file, which is /etc/yubico/rlm/ykrlm-config.cfg.
+For a pre-build Virtual Appliance with YubiX, see:
+http://yubico.github.com/yubix-vm/
 
-### Setting up OTP validation ###
-
-By default, the freeRADIUS setup verifies OTPs using the 
-YubiCloud validation service. The YubiCloud service is free to 
-use and YubiKeys are shipped preprogrammed with a key that works 
-with the YubiCloud out of the box. If you would rather use a 
-different validation service, such as a locally installed one, 
-you can edit the $validation_urls setting in the configuration 
-file.
-
-If you intend to use the built in validation server, you will 
-need to add some YubiKeys to the KSM which is also running on 
-localhost.
-Please see [this guide](https://github.com/Yubico/yubikey-ksm/wiki/GenerateKSMKey)
-for further instructions on generating and importing keys into 
-the KSM.
-
-### Adding users ###
-
-The simplest way of adding users to freeRADIUS is by adding them 
-to /etc/freeradius/users. That file has more details on how to 
-do so, but one very simple example is to add the following line:
-
-  testuser	Cleartext-Password := "testing"
-
-...which will add a user named "testuser" with the password 
-"testing".
-
-Instead of using the users file, you can use one of the other
-freeRADIUS modules that provide authentication, to provide 
-authentication using for example PAM or LDAP. More information 
-available from [freeRADIUS](http://freeradius.org/doc/).
-
-### Provisioning YubiKeys ###
-
-Once you have OTP verificatoin and users set up, you will need 
-to provision specific YubiKeys to your users. This can be done 
-automatically using auto-provisioning, or done manually by 
-editing the mapping file located at /etc/yubico/rlm/ykmapping.
-
-#### Auto-Provisioning ####
-
-Auto-Provisioning gives you an easy way to associate YubiKeys 
-with existing accounts. First, you need to make sure that 
-auto-provisioning is enabled in the configuration file by 
-ensuring that $allow_auto_provisioning = 1 (it is on by default).
-
-With Auto-Provisioning enabled, YubiKeys are assigned to users 
-automatically. When an existing user that does not already have 
-a YubiKey provisioned logs in using a YubiKey, that YubiKey is 
-then assigned to the user. This allows you to hand out YubiKeys 
-to some or all of the users, and let the keys become locked to
-the accounts when they are used. If you need to make changes to 
-the auto-provisioned mapping or need to assign multiple YubiKeys 
-to the same user, see Manual Provisioning below.
-
-#### Manual Provisioning ####
-
-This is done by manualy editing the /etc/yubico/rlm/ykmapping 
-file, which contains all the username to YubiKey associations.
-Provisioning a YubiKey is done by adding one line per user to 
-the file.
-
-Each line should start with the username, then a colon (:), and
-lastly a comma (,) separated list of YubiKey public IDs which 
-are approved for the user.
-Here's an example:
-
-  user1:cccccccccccb
-  user2:cccccccccccd,ccccccccccce
-
-The above lines state that user1 needs to provide an OTP from 
-the YubiKey with the public ID of cccccccccccb to log in. The 
-second user, user2, needs to provide an OTP from either the 
-cccccccccccd key, or the ccccccccccce key.
-
-**NOTE:** Users not listed in the ykmapping file will either 
-not be required to provide an OTP when logging in, or will 
-always be denied, depending on the $security_level setting in 
-the main configuration file.
-
-Once everything is configured, you should be able to 
-authenticate using the radtest utility. The YubiKey OTP can be 
-provided by appending it either to the username or to the 
-password. Here's an example:
-
-  $ radtest user1 testingcccccccccccbbtrtikevthrvhceudvvuveidihckgrgl 127.0.0.1 0 testing123
-  Sending Access-Request of id 51 to 127.0.0.1 port 1812
-	User-Name = "user1"
-	User-Password = "testingcccccccccccbbtrtikevthrvhceudvvuveidihckgrgl"
-	NAS-IP-Address = 127.0.1.1
-	NAS-Port = 0
-  rad_recv: Access-Accept packet from host 127.0.0.1 port 1812, id=51, length=20
-
-## Usage ##
-
-Using YubiKey authentication with RADIUS is done by supplying 
-a valid YubiKey OTP together with the users other credentials.
-This is done by appending the OTP to either the username, or to 
-the password. Please note that appending the OTP to the password 
-only works if the password is transmitted in full, which isn't 
-always the case, depending on the authentication method used. We 
-therefor recommend appending to the username.
-
-If the client support Access-Challenge, the OTP can be omitted
-causing the client to prompt for the OTP specifically.
