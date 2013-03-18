@@ -1,13 +1,1 @@
-YubiX
-======
-
-Installs and configures various Yubico packages, such as a KSM,
-A local YubiKey validation server, and FreeRADIUS with YubiKey 
-support.
-
-To get started, read the Getting Started guide:
-https://github.com/Yubico/yubix/wiki/GettingStarted
-
-For a pre-build Virtual Appliance with YubiX, see:
-http://yubico.github.com/yubix-vm/
-
+debian/README.Debian
