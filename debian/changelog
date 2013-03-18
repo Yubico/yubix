@@ -1,3 +1,10 @@
+yubix (0.5.3) precise; urgency=low
+
+  * Moved rlm-yubico into a separate package, which is now
+    a dependency.
+
+ -- Dain Nilsson <dain@yubico.com>  Mon, 18 Mar 2013 09:36:28 +0100
+
 yubix (0.5.2) precise; urgency=low
 
   * Fixed broken scripts. 
