@@ -18,9 +18,9 @@ if [ ! -L /etc/init.d/freeradius ]; then
     ln -s /usr/share/yubix/freeradius.divert /etc/init.d/freeradius
 fi
 
-# Enable rlm_yubico site
+# Enable yubico site for FreeRADIUS
 if [ ! -L /etc/freeradius/sites-enabled/yubico-default ]; then
-    ln -s /usr/share/rlm_yubico/yubico-default /etc/freeradius/sites-enabled/yubico-default
+    ln -s /usr/share/yubix/yubico-default /etc/freeradius/sites-enabled/yubico-default
 fi
 
 # Disable default site
