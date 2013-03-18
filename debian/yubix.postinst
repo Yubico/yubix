@@ -2,11 +2,6 @@
 
 set -e
 
-# Fix permissions
-chown root:freerad /etc/yubico/rlm/*
-chmod 640 /etc/yubico/rlm/*
-chmod 660 /etc/yubico/rlm/ykmapping
-
 # Set up diverts
 dpkg-divert --package yubix --add --rename --divert /usr/share/yubix/perl.divert-orig /etc/freeradius/modules/perl
 dpkg-divert --package yubix --add --rename --divert /usr/share/yubix/dictionary.divert-orig /etc/freeradius/dictionary
