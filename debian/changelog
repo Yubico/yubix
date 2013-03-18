@@ -1,4 +1,4 @@
-yubix (0.5.3) precise; urgency=low
+yubix (0.5.3~ppa1) precise; urgency=low
 
   * Moved rlm-yubico into a separate package, which is now
     a dependency.
