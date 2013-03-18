@@ -7,5 +7,5 @@
 
 perl {
 	#Use rlm_yubico
-	module = /usr/share/rlm_yubico/rlm_yubico.pl
+	module = /usr/share/rlm-yubico/rlm_yubico.pl
 }

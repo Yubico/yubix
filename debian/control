@@ -15,7 +15,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  yubikey-ksm (>= 1.12),
  yubikey-val (>= 2.21),
  python-pyhsm (>= 1.0.4b),
- rlm-yubico (>= 0.5.1)
+ rlm-yubico (>= 0.5.3)
 Description: Sets up and configures basic YubiKey servers
  Sets up default installations of the following:
  yubikey-ksm, yubikey-val, python-pyhsm, freeradius with rlm-yubico.
