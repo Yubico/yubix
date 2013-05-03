@@ -6,12 +6,13 @@ Uploaders: Dain Nilsson <dain@yubico.com>
 Build-Depends: debhelper (>= 8), config-package-dev
 Standards-Version: 3.9.3
 Homepage: https://github.com/Yubico/yubix/
-#Vcs-Git: git://git.debian.org/collab-maint/yubix.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/yubix.git;a=summary
+Vcs-Browser: https://github.com/Yubico/yubix
+Vcs-Git: git://github.com/Yubico/yubix.git
 
 Package: yubix
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
+ python-yubiadmin (>= 0.0.8),
  yubikey-ksm (>= 1.12),
  yubikey-val (>= 2.21),
  python-pyhsm (>= 1.0.4b),

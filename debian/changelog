@@ -1,3 +1,9 @@
+yubix (0.5.4~ppa1) precise; urgency=low
+
+  * Added YubiAdmin.
+
+ -- Dain Nilsson <dain@yubico.com>  Fri, 03 May 2013 13:18:30 +0200
+
 yubix (0.5.3~ppa2) precise; urgency=low
 
   * Moved rlm-yubico into a separate package, which is now
