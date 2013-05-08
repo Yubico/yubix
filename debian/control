@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Yubico Open Source Maintainers <ossmaint@yubico.com>
 Uploaders: Dain Nilsson <dain@yubico.com>
 Build-Depends: debhelper (>= 8), config-package-dev
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: https://github.com/Yubico/yubix/
 Vcs-Browser: https://github.com/Yubico/yubix
 Vcs-Git: git://github.com/Yubico/yubix.git
@@ -13,11 +13,12 @@ Package: yubix
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  python-yubiadmin (>= 0.0.8),
- yubikey-ksm (>= 1.12),
- yubikey-val (>= 2.21),
- python-pyhsm (>= 1.0.4b),
+ yubikey-ksm (>= 1.13),
+ yubikey-val (>= 2.23),
+ python-pyhsm (>= 1.0.4g),
+ python-yubiauth (>= 0.2.3),
  rlm-yubico (>= 0.5.3)
 Description: Sets up and configures basic YubiKey servers
  Sets up default installations of the following:
- yubikey-ksm, yubikey-val, python-pyhsm, freeradius with rlm-yubico.
+ yubikey-ksm, yubikey-val, python-pyhsm, yubiauth, freeradius with rlm-yubico.
  See each project for further details.

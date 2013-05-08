@@ -1,3 +1,9 @@
+yubix (0.5.5) precise; urgency=low
+
+  * Added YubiAuth.
+
+ -- Dain Nilsson <dain@yubico.com>  Wed, 08 May 2013 14:11:32 +0200
+
 yubix (0.5.4~ppa1) precise; urgency=low
 
   * Added YubiAdmin.
