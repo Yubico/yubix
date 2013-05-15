@@ -1,3 +1,9 @@
+yubix (0.5.6) precise; urgency=low
+
+  * Made FreeRadius use YubiAuth.
+
+ -- Dain Nilsson <dain@yubico.com>  Wed, 15 May 2013 16:36:03 +0200
+
 yubix (0.5.5) precise; urgency=low
 
   * Added YubiAuth.
