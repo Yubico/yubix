@@ -25,7 +25,7 @@
 #
 $INCLUDE	/usr/share/freeradius/dictionary
 
-$INCLUDE        /usr/share/rlm-yubico/dictionary
+$INCLUDE        /usr/share/yubix/dictionary
 
 #
 #	Place additional attributes or $INCLUDEs here.  They will

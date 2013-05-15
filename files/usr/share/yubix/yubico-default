@@ -38,9 +38,9 @@ authorize {
 	#  'raddb/huntgroups' files.
 	preprocess
 
-	#  To authenticate YubiKeys leave the following line uncommented
+	#  To authenticate users using YubiAuth leave the following line uncommented
 	perl
-
+	
 	#
 	#  If you want to have a log of authentication requests,
 	#  un-comment the following line, and the 'detail auth_log'
@@ -204,6 +204,12 @@ authorize {
 #  the post-auth section is for.
 #
 authenticate {
+	#
+	#  YubiAuth authentication.
+	Auth-Type Perl {
+		perl
+	}
+
 	#
 	#  PAP authentication, when a back-end database listed
 	#  in the 'authorize' section supplies a password.  The
@@ -413,9 +419,6 @@ session {
 #  Once we KNOW that the user has been authenticated, there are
 #  additional steps we can take.
 post-auth {
-	#  Required for Auto-Provisioning of YubiKeys
-	perl
-
 	#  Get an address from the IP Pool.
 #	main_pool
 

@@ -6,6 +6,6 @@
 #
 
 perl {
-	#Use rlm_yubico
-	module = /usr/share/rlm-yubico/rlm_yubico.pl
+	#Use rlm_yubiauth
+	module = /usr/share/yubix/rlm_yubiauth.pl
 }

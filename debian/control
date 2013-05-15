@@ -12,12 +12,14 @@ Vcs-Git: git://github.com/Yubico/yubix.git
 Package: yubix
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
+ apache2,
+ libapache2-mod-wsgi,
  python-yubiadmin (>= 0.0.8),
  yubikey-ksm (>= 1.13),
  yubikey-val (>= 2.23),
  python-pyhsm (>= 1.0.4g),
  python-yubiauth (>= 0.2.3),
- rlm-yubico (>= 0.5.3)
+ libwww-perl
 Description: Sets up and configures basic YubiKey servers
  Sets up default installations of the following:
  yubikey-ksm, yubikey-val, python-pyhsm, yubiauth, freeradius with rlm-yubico.
