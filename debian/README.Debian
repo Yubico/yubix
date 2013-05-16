@@ -1,13 +1,34 @@
-YubiX
-======
+#YubiX#
+YubiX is a stack of software that works together, letting you build your custom
+solution ontop of it. It consists of many of Yubico's software offerings, but
+also some third party software, such as FreeRADIUS. YubiX is available as a 
+Debian package, easily installable under a Debian based OS, and as a virtual 
+appliance that's ready to go right out of the box.
 
-Installs and configures various Yubico packages, such as a KSM,
-A local YubiKey validation server, and FreeRADIUS with YubiKey 
-support.
+##What's Included##
+Among the things included in YubiX is the YubiAuth user authentication backend,
+which keeps a database of users and lets them authenticate using a password
+and/or YubiKey. FreeRADIUS is also installed, and configured to use the
+YubiAuth backend for user authentication, giving you RADIUS support with the
+YubiKey from the start. You can also use YubiAuth for user authentication in
+your own custom software.
+
+The default configuration uses our free YubiCloud service for YubiKey OTP
+validation, which works with the pre-programmed YubiKeys we sell immediately.
+You can instead opt to run your own validation servers, and re-program YubiKeys
+for those servers, and YubiX comes with the validation and KSM server software
+required to do so.
+
+Managing YubiX can either be done by manually editing configuration files, or
+by using the included YubiAdmin administrative web interface. By default, this
+interface can be accessed by pointing a web browser to the IP of the YubiX 
+installation. The first time you do this, you will be asked to set a username
+and password to prevent unauthorized access.
 
 To get started, read the Getting Started guide:
 https://github.com/Yubico/yubix/wiki/GettingStarted
 
 For a pre-build Virtual Appliance with YubiX, see:
 http://yubico.github.com/yubix-vm/
+
 

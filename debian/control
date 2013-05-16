@@ -14,6 +14,7 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  apache2,
  libapache2-mod-wsgi,
+ freeradius (>= 2.1.10),
  python-yubiadmin (>= 0.0.8),
  yubikey-ksm (>= 1.13),
  yubikey-val (>= 2.23),
