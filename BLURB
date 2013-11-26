@@ -1,0 +1,7 @@
+Author: Yubico
+Basename: yubix
+Homepage: https://github.com/Yubico/yubix/
+License: BSD-2-Clause
+Name: yubix
+Project: yubix
+Summary: Installs and configures various Yubico packages
