@@ -1,9 +1,20 @@
 #YubiX#
+
+##Description##
 YubiX is a stack of software that works together, letting you build your custom
 solution ontop of it. It consists of many of Yubico's software offerings, but
 also some third party software, such as FreeRADIUS. YubiX is available as a 
 Debian package, easily installable under a Debian based OS, and as a virtual 
 appliance that's ready to go right out of the box.
+
+##Core features##
+* YubiAuth, the extensible user authentication framework capable of utilizing
+  YubiKeys as well as a YubiHSM for increased security.
+* RADIUS authentication of users, with optional YubiKey support.
+* Capable of using the YubiCloud validation service, or a self-hosted server.
+* Web-based administration for simple setup and administration.
+* Modular composition, allowing you to pick and choose among which services to
+  use, and the freedom to provide parts of your own.
 
 ##What's Included##
 Among the things included in YubiX is the YubiAuth user authentication backend,
