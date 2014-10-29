@@ -77,8 +77,8 @@ password: yubiadmin/yubiadmin.
 
 The following describes a quick way to set up a system where users are 
 authenticated over RADIUS with YubiKey OTP support. YubiX comes with 
-http://freeradius.org/[FreeRADIUS] pre-configured for use with the YubiKey, 
-using a custom module which uses https://developers.yubico.com/yubiauth[YubiAuth]
+http://freeradius.org[FreeRADIUS] pre-configured for use with the YubiKey,
+using a custom module which uses https://developers.yubico.com/yubiauth/[YubiAuth]
 as an authentication backend.
 
 ==== OTP validation
@@ -92,15 +92,15 @@ shipped pre-programmed with a key that works with YubiCloud out of the box.
 ===== Using your own validation server
 
 If you intend to use the built in validation server, you will 
-need to add some YubiKeys to the https://developers.yubico.com/yubikey-ksm[KSM] 
+need to add some YubiKeys to the https://developers.yubico.com/yubikey-ksm/[KSM]
 which is also running on localhost.
 This isn't required if you intend to use the YubiCloud service.
 Please follow along these three guides describing the steps 
 retuired to generate and import keys into the KSM:
 
- * https://developers.yubico.com/yubikey-ksm/GenerateKSMKey.html[Generate KSM Key]
- * https://developers.yubico.com/yubikey-ksm/GenerateKeys.html[Generate Keys]
- * https://developers.yubico.com/yubikey-ksm/ImportKeysToKSM.html[Import Keys To KSM]
+ * https://developers.yubico.com/yubikey-ksm/Generate_KSM_Key.html[Generate KSM Key]
+ * https://developers.yubico.com/yubikey-ksm/Generate_Keys.html[Generate Keys]
+ * https://developers.yubico.com/yubikey-ksm/Import_Keys_To_KSM.html[Import Keys To KSM]
 
 You also need to change the YubiAuth configuration so that it uses the local
 validation server, instead of YubiCloud. During installation, a client should 
