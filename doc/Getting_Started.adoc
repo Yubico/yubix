@@ -16,7 +16,7 @@ out of the box, with relatively little customization.
 
 ==== YubiX Virtual Appliance
 
-You may download a virtual appliance of the YubiX: http://yubico.github.com/yubix-vm/[YubiX Virtual Appliance].
+You may download a virtual appliance of the YubiX: http://developers.yubico.com/yubix-vm/[YubiX Virtual Appliance].
 
 Once downloaded, the virtual appliance needs to be booted using some virtualization framework.  We provided instructions for the following environments.  If you are installing the package directly onto your machine, you don't need to do anything extra.
 

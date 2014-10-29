@@ -36,8 +36,7 @@ interface can be accessed by pointing a web browser to the IP of the YubiX
 installation. The first time you do this, you will be asked to set a username
 and password to prevent unauthorized access.
 
-To get started, read the Getting Started guide:
-https://github.com/Yubico/yubix/wiki/GettingStarted
+To get started, read the link:doc/Getting_Started.adoc[Getting Started] guide
 
 For a pre-build Virtual Appliance with YubiX, see:
-http://yubico.github.com/yubix-vm/
+https://developers.yubico.com/yubix-vm/
