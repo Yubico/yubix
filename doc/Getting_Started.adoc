@@ -20,7 +20,7 @@ You may download a virtual appliance of the YubiX: http://developers.yubico.com/
 
 Once downloaded, the virtual appliance needs to be booted using some virtualization framework.  We provided instructions for the following environments.  If you are installing the package directly onto your machine, you don't need to do anything extra.
 
-https://developers.yubico.com/yubix-vm/wiki/YubiX-Installation-Using-Virtual-Machine-Manager[YubiX on virt-manager]
+https://developers.yubico.com/yubix-vm/Installation_Using_Virtual_Machine_Manager.html[YubiX on virt-manager]
 
 Once booted you may login using the username 'yubikey' and password 'yubico'.
 Change the password if you are concerned with console access security.
@@ -98,9 +98,9 @@ This isn't required if you intend to use the YubiCloud service.
 Please follow along these three guides describing the steps 
 retuired to generate and import keys into the KSM:
 
- * https://developers.yubico.com/yubikey-ksm/wiki/GenerateKSMKey[Generate KSM Key]
- * https://developers.yubico.com/yubikey-ksm/wiki/GenerateKeys[Generate Keys]
- * https://developers.yubico.com/yubikey-ksm/wiki/ImportKeysToKSM[Import Keys To KSM]
+ * https://developers.yubico.com/yubikey-ksm/GenerateKSMKey.html[Generate KSM Key]
+ * https://developers.yubico.com/yubikey-ksm/GenerateKeys.html[Generate Keys]
+ * https://developers.yubico.com/yubikey-ksm/ImportKeysToKSM.html[Import Keys To KSM]
 
 You also need to change the YubiAuth configuration so that it uses the local
 validation server, instead of YubiCloud. During installation, a client should 
