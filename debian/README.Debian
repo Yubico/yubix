@@ -1,5 +1,7 @@
 == YubiX
 
+NOTE: This project is deprecated and is no longer being maintained.
+
 === Description
 YubiX is a stack of software that works together, letting you build your custom
 solution ontop of it. It consists of many of Yubico's software offerings, but
